@@ -1,0 +1,20 @@
+server:
+  port: 27001
+spring:
+  application:
+    name: "accounts-server"
+  jackson:
+    serialization:
+      write_dates_as_timestamps: false
+    default-property-inclusion: non_absent
+    deserialization:
+      READ_UNKNOWN_ENUM_VALUES_USING_DEFAULT_VALUE: true
+  main:
+    allow-bean-definition-overriding: true
+    web-application-type: reactive
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
+  webflux:
+    base-path: "/accounts"
