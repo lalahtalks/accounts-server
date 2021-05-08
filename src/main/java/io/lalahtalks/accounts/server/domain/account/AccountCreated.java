@@ -1,4 +1,4 @@
-package io.lalahtalks.accounts.server.domain;
+package io.lalahtalks.accounts.server.domain.account;
 
 import lombok.Builder;
 import lombok.NonNull;
