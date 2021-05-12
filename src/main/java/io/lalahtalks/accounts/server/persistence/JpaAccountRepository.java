@@ -2,9 +2,12 @@ package io.lalahtalks.accounts.server.persistence;
 
 import io.lalahtalks.accounts.server.domain.Email;
 import io.lalahtalks.accounts.server.domain.account.Account;
+import io.lalahtalks.accounts.server.domain.account.AccountId;
 import io.lalahtalks.accounts.server.domain.account.AccountRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -18,9 +21,23 @@ public class JpaAccountRepository implements AccountRepository {
     }
 
     @Override
+    public Optional<Account> find(AccountId accountId) {
+        return accountEntityRepository.findById(accountId.getValue())
+                .map(this::fromEntity);
+    }
+
+    @Override
     public void save(Account account) {
         var toBeSaved = toEntity(account);
         accountEntityRepository.save(toBeSaved);
+    }
+
+    private Account fromEntity(AccountEntity entity) {
+        return Account.builder()
+                .id(new AccountId(entity.getId()))
+                .email(new Email(entity.getEmail()))
+                .createdAt(entity.getCreatedAt())
+                .build();
     }
 
     private AccountEntity toEntity(Account account) {

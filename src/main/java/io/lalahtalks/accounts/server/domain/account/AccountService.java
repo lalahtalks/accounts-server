@@ -2,7 +2,7 @@ package io.lalahtalks.accounts.server.domain.account;
 
 import io.lalahtalks.accounts.server.domain.Email;
 import io.lalahtalks.accounts.server.domain.user.UserGateway;
-import io.lalahtalks.accounts.server.domain.user.UserId;
+import io.lalahtalks.accounts.server.domain.user.UserRegistered;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -18,29 +18,29 @@ public class AccountService {
 
     public AccountCreated create(AccountCreationRequest request) {
         checkAccountDoesNotAlreadyExist(request.getEmail());
-        var userId = registerUser(request);
-        var account = create(userId, request);
+        var userRegistered = registerUser(request);
+        var account = create(userRegistered, request);
         return AccountCreated.builder()
                 .accountId(account.getId())
                 .createdAt(account.getCreatedAt())
                 .build();
     }
 
-    private Account create(UserId userId, AccountCreationRequest request) {
-        var now = clock.instant();
-        var accountId = new AccountId(userId.getValue());
+    private Account create(UserRegistered userRegistered, AccountCreationRequest request) {
+        var accountId = new AccountId(userRegistered.getUserId().getValue());
         var account = Account.builder()
                 .id(accountId)
                 .email(request.getEmail())
-                .createdAt(now)
+                .createdAt(userRegistered.getCreatedAt())
                 .build();
 
         accountRepository.save(account);
         return account;
     }
 
-    private UserId registerUser(AccountCreationRequest request) {
-        var userCreationRequest = request.toUserRegistrationRequest();
+    private UserRegistered registerUser(AccountCreationRequest request) {
+        var now = clock.instant();
+        var userCreationRequest = request.toUserRegistrationRequest(now);
         return userGateway.register(userCreationRequest);
     }
 

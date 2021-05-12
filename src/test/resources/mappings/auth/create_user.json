@@ -1,0 +1,66 @@
+{
+  "request": {
+    "urlPath": "/auth/admin/realms/lalahtalks/users",
+    "method": "POST",
+    "bodyPatterns": [
+      {
+        "equalToJson": {
+          "self" : null,
+          "id" : null,
+          "origin" : null,
+          "createdTimestamp" : 1356091200,
+          "username": "test1@test.com",
+          "enabled": true,
+          "totp" : null,
+          "emailVerified" : false,
+          "firstName" : null,
+          "lastName" : null,
+          "email": "test1@test.com",
+          "federationLink" : null,
+          "serviceAccountClientId" : null,
+          "attributes" : null,
+          "credentials" : [
+            {
+              "id" : null,
+              "type" : "password",
+              "userLabel" : null,
+              "createdDate" : null,
+              "secretData" : null,
+              "credentialData" : null,
+              "priority" : null,
+              "value" : "passwd",
+              "temporary" : false,
+              "device" : null,
+              "hashedSaltedValue" : null,
+              "salt" : null,
+              "hashIterations" : null,
+              "counter" : null,
+              "algorithm" : null,
+              "digits" : null,
+              "period" : null,
+              "config" : null
+            }
+          ],
+          "disableableCredentialTypes" : null,
+          "requiredActions" : null,
+          "federatedIdentities" : null,
+          "realmRoles" : null,
+          "clientRoles" : null,
+          "clientConsents" : null,
+          "notBefore" : null,
+          "applicationRoles" : null,
+          "socialLinks" : null,
+          "groups" : null,
+          "access" : null
+        }
+      }
+    ]
+  },
+  "response": {
+    "status": 201,
+    "headers": {
+      "Content-Type": "application/json",
+      "Location": "users/user_1"
+    }
+  }
+}

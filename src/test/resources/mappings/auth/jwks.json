@@ -1,0 +1,22 @@
+{
+  "request": {
+    "urlPath": "/auth/realms/lalahtalks/protocol/openid-connect/certs",
+    "method": "GET"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "keys": [
+        {
+          "kty": "RSA",
+          "e": "AQAB",
+          "kid": "4e5f4ecf-9456-4a9f-b62a-19fa85c9933e",
+          "n": "noPKIU7Pp6XmJ8QUQDkKDh25QUy6ysk0HUYYoqHlmJAlAleYuPYiCijnkGwaNVd3DvO1-VSBdZS_nIIRSvHPO992gsc3XOSPWlsB2QTA2q_rCk_INd9awrhLkJWa3d3lFS_u7Plp8zsiaT0acq54eAkPf3u_hUwQcXIYZIODqVuD3nX-BCdGU2HZxLAvDrOD8kvO6jL-D31p-FjkT3yI1_jCAzOyePNSgTAESuK_N4MsTymPPPUU_pB92cl2pVYczOyILJQkqkbcRw3feUaYxAGCvNBmgCSW1BgJDOOx-zOlaMLoUUgnAp3YDZ2rMQHgrAlTN0UVPEevMSR5AjNWdQ"
+        }
+      ]
+    }
+  }
+}

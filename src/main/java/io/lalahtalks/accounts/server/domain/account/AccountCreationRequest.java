@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.NonNull;
 import lombok.Value;
 
+import java.time.Instant;
+
 @Value
 @Builder
 public class AccountCreationRequest {
@@ -14,10 +16,11 @@ public class AccountCreationRequest {
     @NonNull Email email;
     @NonNull Password password;
 
-    public UserRegistrationRequest toUserRegistrationRequest() {
+    public UserRegistrationRequest toUserRegistrationRequest(Instant createdAt) {
         return UserRegistrationRequest.builder()
                 .email(email)
                 .password(password)
+                .createdAt(createdAt)
                 .build();
     }
 
