@@ -1,0 +1,32 @@
+{
+  "exp": 9999999999,
+  "iat": 1620856056,
+  "jti": "2e0dfcb7-3856-44c9-b029-94f909d6902d",
+  "iss": "http://127.0.0.1/auth/realms/lalahtalks",
+  "aud": "account",
+  "sub": "89201d5a-6d3c-4265-92cb-7426261145a5",
+  "typ": "Bearer",
+  "azp": "test",
+  "acr": "1",
+  "realm_access": {
+    "roles": [
+      "offline_access",
+      "uma_authorization"
+    ]
+  },
+  "resource_access": {
+    "account": {
+      "roles": [
+        "manage-account",
+        "manage-account-links",
+        "view-profile"
+      ]
+    }
+  },
+  "scope": "profile email",
+  "clientId": "test",
+  "clientHost": "10.0.10.10",
+  "email_verified": false,
+  "preferred_username": "service-account-test",
+  "clientAddress": "10.0.10.10"
+}

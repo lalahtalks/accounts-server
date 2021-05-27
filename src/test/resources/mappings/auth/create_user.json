@@ -9,13 +9,13 @@
           "id" : null,
           "origin" : null,
           "createdTimestamp" : 1356091200,
-          "username": "test1@test.com",
+          "username": "test@test.com",
           "enabled": true,
           "totp" : null,
           "emailVerified" : false,
           "firstName" : null,
           "lastName" : null,
-          "email": "test1@test.com",
+          "email": "test@test.com",
           "federationLink" : null,
           "serviceAccountClientId" : null,
           "attributes" : null,
@@ -28,7 +28,7 @@
               "secretData" : null,
               "credentialData" : null,
               "priority" : null,
-              "value" : "passwd",
+              "value" : "my_password",
               "temporary" : false,
               "device" : null,
               "hashedSaltedValue" : null,
@@ -60,7 +60,7 @@
     "status": 201,
     "headers": {
       "Content-Type": "application/json",
-      "Location": "users/user_1"
+      "Location": "users/account_1"
     }
   }
 }
