@@ -11,6 +11,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.zalando.problem.Problem;
 import org.zalando.problem.Status;
 
+import static io.lalahtalks.accounts.client.http.contract.AccountsHttpPaths.ACCOUNTS_PATH;
 import static io.lalahtalks.accounts.server.test.DataAccessToken.ALL_MIGHTY;
 import static io.lalahtalks.accounts.server.test.DataAccessToken.NOBODY;
 import static io.lalahtalks.accounts.server.test.DataAccount.*;
@@ -28,8 +29,8 @@ class AccountCreationTest extends ContextAware {
         var response = given()
                 .auth().preemptive().oauth2(ALL_MIGHTY)
                 .with().contentType(MediaType.APPLICATION_JSON_VALUE)
-                .body(ACCOUNT_CREATION_REQUEST_1_DTO)
-                .post("/accounts")
+                .body(ACCOUNT_CREATION_REQUEST_DTO)
+                .post(ACCOUNTS_PATH)
                 .then()
                 .statusCode(HttpStatus.CREATED.value())
                 .extract().as(AccountCreatedDto.class);
@@ -46,8 +47,8 @@ class AccountCreationTest extends ContextAware {
         var response = given()
                 .auth().preemptive().oauth2(ALL_MIGHTY)
                 .with().contentType(MediaType.APPLICATION_JSON_VALUE)
-                .body(ACCOUNT_CREATION_REQUEST_2_DTO)
-                .post("/accounts")
+                .body(ACCOUNT_CREATION_REQUEST_DTO)
+                .post(ACCOUNTS_PATH)
                 .then()
                 .statusCode(HttpStatus.CONFLICT.value())
                 .extract().as(Problem.class);
@@ -62,8 +63,8 @@ class AccountCreationTest extends ContextAware {
         var response = given()
                 .auth().preemptive().oauth2(NOBODY)
                 .with().contentType(MediaType.APPLICATION_JSON_VALUE)
-                .body(ACCOUNT_CREATION_REQUEST_1_DTO)
-                .post("/accounts")
+                .body(ACCOUNT_CREATION_REQUEST_DTO)
+                .post(ACCOUNTS_PATH)
                 .then()
                 .statusCode(HttpStatus.FORBIDDEN.value())
                 .extract().as(Problem.class);

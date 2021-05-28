@@ -16,6 +16,11 @@ public class AccountService {
     private final Clock clock;
     private final UserGateway userGateway;
 
+    public Account get(AccountId accountId) {
+        return accountRepository.find(accountId)
+                .orElseThrow(AccountNotFoundException::new);
+    }
+
     public AccountCreated create(AccountCreationRequest request) {
         checkAccountDoesNotAlreadyExist(request.getEmail());
         var userRegistered = registerUser(request);

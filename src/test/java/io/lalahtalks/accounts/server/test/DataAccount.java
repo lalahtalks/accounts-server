@@ -2,6 +2,7 @@ package io.lalahtalks.accounts.server.test;
 
 import io.lalahtalks.accounts.client.dto.AccountCreatedDto;
 import io.lalahtalks.accounts.client.dto.AccountCreationRequestDto;
+import io.lalahtalks.accounts.client.dto.AccountDto;
 import io.lalahtalks.accounts.server.domain.Email;
 import io.lalahtalks.accounts.server.domain.account.Account;
 import io.lalahtalks.accounts.server.domain.account.AccountId;
@@ -25,13 +26,14 @@ public class DataAccount {
             .createdAt(NOW)
             .build();
 
-    public static final AccountCreationRequestDto ACCOUNT_CREATION_REQUEST_1_DTO = AccountCreationRequestDto.builder()
+    public static final AccountDto ACCOUNT_1_DTO = AccountDto.builder()
+            .id(ACCOUNT_1_ID_VALUE)
             .email(ACCOUNT_1_EMAIL_VALUE)
-            .password(A_PASSWORD)
+            .createdAt(NOW)
             .build();
 
-    public static final AccountCreationRequestDto ACCOUNT_CREATION_REQUEST_2_DTO = AccountCreationRequestDto.builder()
-            .email("already_exists@test.com")
+    public static final AccountCreationRequestDto ACCOUNT_CREATION_REQUEST_DTO = AccountCreationRequestDto.builder()
+            .email(ACCOUNT_1_EMAIL_VALUE)
             .password(A_PASSWORD)
             .build();
 
