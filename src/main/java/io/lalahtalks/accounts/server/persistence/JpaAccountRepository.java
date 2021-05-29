@@ -4,6 +4,7 @@ import io.lalahtalks.accounts.server.domain.Email;
 import io.lalahtalks.accounts.server.domain.account.Account;
 import io.lalahtalks.accounts.server.domain.account.AccountId;
 import io.lalahtalks.accounts.server.domain.account.AccountRepository;
+import io.lalahtalks.accounts.server.domain.user.Username;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -36,6 +37,7 @@ public class JpaAccountRepository implements AccountRepository {
         return Account.builder()
                 .id(new AccountId(entity.getId()))
                 .email(new Email(entity.getEmail()))
+                .username(new Username(entity.getUsername()))
                 .createdAt(entity.getCreatedAt())
                 .build();
     }
@@ -44,6 +46,7 @@ public class JpaAccountRepository implements AccountRepository {
         return AccountEntity.builder()
                 .id(account.getId().getValue())
                 .email(account.getEmail().getValue())
+                .username(account.getUsername().getValue())
                 .createdAt(account.getCreatedAt())
                 .build();
     }

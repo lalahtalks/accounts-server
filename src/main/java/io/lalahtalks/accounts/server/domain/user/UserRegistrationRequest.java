@@ -12,6 +12,7 @@ import java.time.Instant;
 public class UserRegistrationRequest {
 
     @NonNull Email email;
+    @NonNull Username username;
     @NonNull Password password;
     @NonNull Instant createdAt;
 

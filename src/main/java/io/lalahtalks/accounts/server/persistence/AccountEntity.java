@@ -26,6 +26,9 @@ public class AccountEntity {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "username")
+    private String username;
+
     @Column(name = "created_at")
     private Instant createdAt;
 

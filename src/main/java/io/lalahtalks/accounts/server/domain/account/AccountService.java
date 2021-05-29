@@ -36,6 +36,7 @@ public class AccountService {
         var account = Account.builder()
                 .id(accountId)
                 .email(request.getEmail())
+                .username(request.getUsername())
                 .createdAt(userRegistered.getCreatedAt())
                 .build();
 

@@ -9,7 +9,7 @@
           "id" : null,
           "origin" : null,
           "createdTimestamp" : 1356091200,
-          "username": "test@test.com",
+          "username": "User 1",
           "enabled": true,
           "totp" : null,
           "emailVerified" : false,
