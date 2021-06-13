@@ -18,7 +18,7 @@ import static io.lalahtalks.accounts.server.test.DataAccount.*;
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class AccountCreationTest extends ContextAware {
+class CreateAccountTest extends ContextAware {
 
     @Autowired
     private AccountRepository accountRepository;
