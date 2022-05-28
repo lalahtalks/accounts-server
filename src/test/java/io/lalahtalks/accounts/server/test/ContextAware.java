@@ -16,7 +16,7 @@ public class ContextAware {
     private String url;
 
     @BeforeEach
-    public void setUpApi() {
+    void setUpApi() {
         RestAssured.baseURI = url;
     }
 

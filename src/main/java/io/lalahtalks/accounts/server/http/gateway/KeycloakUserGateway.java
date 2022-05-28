@@ -1,7 +1,6 @@
 package io.lalahtalks.accounts.server.http.gateway;
 
 import io.lalahtalks.accounts.server.domain.user.*;
-import lombok.RequiredArgsConstructor;
 import org.keycloak.admin.client.resource.UsersResource;
 import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
@@ -13,29 +12,32 @@ import static org.keycloak.admin.client.CreatedResponseUtil.getCreatedId;
 import static org.keycloak.representations.idm.CredentialRepresentation.PASSWORD;
 
 @Component
-@RequiredArgsConstructor
 public class KeycloakUserGateway implements UserGateway {
 
     private final UsersResource usersResource;
+
+    public KeycloakUserGateway(UsersResource usersResource) {
+        this.usersResource = usersResource;
+    }
 
     @Override
     public UserRegistered register(UserRegistrationRequest request) {
         var createdId = createAndGetId(request);
         return UserRegistered.builder()
                 .userId(createdId)
-                .createdAt(request.getCreatedAt())
+                .registeredAt(request.createdAt())
                 .build();
     }
 
     private UserId createAndGetId(UserRegistrationRequest request) {
-        var credential = getCredential(request.getPassword());
+        var credential = getCredential(request.password());
         var user = new UserRepresentation();
         user.setEnabled(true);
-        user.setEmail(request.getEmail().getValue());
-        user.setUsername(request.getUsername().getValue());
+        user.setEmail(request.email().value());
+        user.setUsername(request.username().value());
         user.setCredentials(List.of(credential));
         user.setEmailVerified(false);
-        user.setCreatedTimestamp(request.getCreatedAt().getEpochSecond());
+        user.setCreatedTimestamp(request.createdAt().getEpochSecond());
 
         var response = usersResource.create(user);
         var createdId = getCreatedId(response);
@@ -46,7 +48,7 @@ public class KeycloakUserGateway implements UserGateway {
         var credential = new CredentialRepresentation();
         credential.setTemporary(false);
         credential.setType(PASSWORD);
-        credential.setValue(password.getValue());
+        credential.setValue(password.value());
         return credential;
     }
 

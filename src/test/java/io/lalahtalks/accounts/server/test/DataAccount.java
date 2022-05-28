@@ -7,12 +7,9 @@ import io.lalahtalks.accounts.server.domain.Email;
 import io.lalahtalks.accounts.server.domain.account.Account;
 import io.lalahtalks.accounts.server.domain.account.AccountId;
 import io.lalahtalks.accounts.server.domain.user.Username;
-import lombok.NoArgsConstructor;
 
 import static io.lalahtalks.accounts.server.test.DataInstant.NOW;
-import static lombok.AccessLevel.PRIVATE;
 
-@NoArgsConstructor(access = PRIVATE)
 public class DataAccount {
 
     public static final String ACCOUNT_1_ID_VALUE = "account_1";
@@ -47,5 +44,9 @@ public class DataAccount {
             .accountId(ACCOUNT_1_ID_VALUE)
             .createdAt(NOW)
             .build();
+
+    private DataAccount() {
+
+    }
 
 }

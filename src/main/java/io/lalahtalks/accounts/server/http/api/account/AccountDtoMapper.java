@@ -16,25 +16,25 @@ class AccountDtoMapper {
 
     AccountCreatedDto toDto(AccountCreated created) {
         return AccountCreatedDto.builder()
-                .accountId(created.getAccountId().getValue())
-                .createdAt(created.getCreatedAt())
+                .accountId(created.accountId().value())
+                .createdAt(created.createdAt())
                 .build();
     }
 
     AccountDto toDto(Account account) {
         return AccountDto.builder()
-                .id(account.getId().getValue())
-                .email(account.getEmail().getValue())
-                .username(account.getUsername().getValue())
-                .createdAt(account.getCreatedAt())
+                .id(account.id().value())
+                .email(account.email().value())
+                .username(account.username().value())
+                .createdAt(account.createdAt())
                 .build();
     }
 
     AccountCreationRequest fromDto(AccountCreationRequestDto requestDto) {
         return AccountCreationRequest.builder()
-                .email(new Email(requestDto.getEmail()))
-                .username(new Username(requestDto.getUsername()))
-                .password(new Password(requestDto.getPassword()))
+                .email(new Email(requestDto.email()))
+                .username(new Username(requestDto.username()))
+                .password(new Password(requestDto.password()))
                 .build();
     }
 

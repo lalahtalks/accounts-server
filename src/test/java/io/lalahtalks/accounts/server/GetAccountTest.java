@@ -1,6 +1,7 @@
 package io.lalahtalks.accounts.server;
 
 import io.lalahtalks.accounts.client.dto.AccountDto;
+import io.lalahtalks.accounts.client.http.contract.problem.AccountNotFoundProblem;
 import io.lalahtalks.accounts.server.test.ContextAware;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
@@ -45,11 +46,10 @@ class GetAccountTest extends ContextAware {
                 .get(ACCOUNT_PATH)
                 .then()
                 .statusCode(HttpStatus.NOT_FOUND.value())
-                .extract().as(Problem.class);
+                .extract()
+                .as(AccountNotFoundProblem.class);
 
-        assertThat(response.getType()).hasToString("urn:lalahtalks:problem:accounts:account-not-found");
-        assertThat(response.getTitle()).isEqualTo("Account not found");
-        assertThat(response.getStatus()).isEqualTo(Status.NOT_FOUND);
+        assertThat(response.getDetail()).isEqualTo("account ID 'account_1'");
     }
 
     @Test
@@ -61,7 +61,8 @@ class GetAccountTest extends ContextAware {
                 .get(ACCOUNT_PATH)
                 .then()
                 .statusCode(HttpStatus.FORBIDDEN.value())
-                .extract().as(Problem.class);
+                .extract()
+                .as(Problem.class);
 
         assertThat(response.getStatus()).isEqualTo(Status.FORBIDDEN);
     }

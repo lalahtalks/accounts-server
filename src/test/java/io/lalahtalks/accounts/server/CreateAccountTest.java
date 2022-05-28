@@ -1,6 +1,7 @@
 package io.lalahtalks.accounts.server;
 
 import io.lalahtalks.accounts.client.dto.AccountCreatedDto;
+import io.lalahtalks.accounts.client.http.contract.problem.AccountAlreadyExistsProblem;
 import io.lalahtalks.accounts.server.domain.account.AccountRepository;
 import io.lalahtalks.accounts.server.test.ContextAware;
 import org.junit.jupiter.api.Test;
@@ -51,11 +52,10 @@ class CreateAccountTest extends ContextAware {
                 .post(ACCOUNTS_PATH)
                 .then()
                 .statusCode(HttpStatus.CONFLICT.value())
-                .extract().as(Problem.class);
+                .extract()
+                .as(AccountAlreadyExistsProblem.class);
 
-        assertThat(response.getType()).hasToString("urn:lalahtalks:problem:accounts:account-already-exists");
-        assertThat(response.getTitle()).isEqualTo("Account already exists");
-        assertThat(response.getStatus()).isEqualTo(Status.CONFLICT);
+        assertThat(response.getDetail()).isEqualTo("email 'test@test.com'");
     }
 
     @Test
@@ -67,7 +67,8 @@ class CreateAccountTest extends ContextAware {
                 .post(ACCOUNTS_PATH)
                 .then()
                 .statusCode(HttpStatus.FORBIDDEN.value())
-                .extract().as(Problem.class);
+                .extract()
+                .as(Problem.class);
 
         assertThat(response.getStatus()).isEqualTo(Status.FORBIDDEN);
     }

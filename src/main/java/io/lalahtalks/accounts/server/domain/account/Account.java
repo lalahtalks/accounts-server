@@ -2,19 +2,50 @@ package io.lalahtalks.accounts.server.domain.account;
 
 import io.lalahtalks.accounts.server.domain.Email;
 import io.lalahtalks.accounts.server.domain.user.Username;
-import lombok.Builder;
-import lombok.NonNull;
-import lombok.Value;
 
 import java.time.Instant;
 
-@Value
-@Builder
-public class Account {
+public record Account(
+        AccountId id,
+        Email email,
+        Username username,
+        Instant createdAt) {
 
-    @NonNull AccountId id;
-    @NonNull Email email;
-    @NonNull Username username;
-    @NonNull Instant createdAt;
+    public static final class Builder {
+
+        private AccountId id;
+        private Email email;
+        private Username username;
+        private Instant createdAt;
+
+        public Builder id(AccountId id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder email(Email email) {
+            this.email = email;
+            return this;
+        }
+
+        public Builder username(Username username) {
+            this.username = username;
+            return this;
+        }
+
+        public Builder createdAt(Instant createdAt) {
+            this.createdAt = createdAt;
+            return this;
+        }
+
+        public Account build() {
+            return new Account(id, email, username, createdAt);
+        }
+
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
 
 }
