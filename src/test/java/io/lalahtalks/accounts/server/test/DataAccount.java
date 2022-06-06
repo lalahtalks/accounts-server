@@ -20,30 +20,24 @@ public class DataAccount {
     public static final Username ACCOUNT_1_USERNAME = new Username(ACCOUNT_1_USERNAME_VALUE);
     public static final String A_PASSWORD = "my_password";
 
-    public static final Account ACCOUNT_1 = Account.builder()
-            .id(ACCOUNT_1_ID)
-            .email(ACCOUNT_1_EMAIL)
-            .username(ACCOUNT_1_USERNAME)
-            .createdAt(NOW)
-            .build();
+    public static final Account ACCOUNT_1 = new Account(
+            ACCOUNT_1_ID,
+            ACCOUNT_1_EMAIL,
+            ACCOUNT_1_USERNAME,
+            NOW);
 
-    public static final AccountDto ACCOUNT_1_DTO = AccountDto.builder()
-            .id(ACCOUNT_1_ID_VALUE)
-            .email(ACCOUNT_1_EMAIL_VALUE)
-            .username(ACCOUNT_1_USERNAME_VALUE)
-            .createdAt(NOW)
-            .build();
+    public static final AccountDto ACCOUNT_1_DTO = new AccountDto(
+            ACCOUNT_1_ID_VALUE,
+            ACCOUNT_1_EMAIL_VALUE,
+            ACCOUNT_1_USERNAME_VALUE,
+            NOW);
 
-    public static final AccountCreationRequestDto ACCOUNT_CREATION_REQUEST_DTO = AccountCreationRequestDto.builder()
-            .email(ACCOUNT_1_EMAIL_VALUE)
-            .username(ACCOUNT_1_USERNAME_VALUE)
-            .password(A_PASSWORD)
-            .build();
+    public static final AccountCreationRequestDto ACCOUNT_CREATION_REQUEST_DTO = new AccountCreationRequestDto(
+            ACCOUNT_1_EMAIL_VALUE,
+            ACCOUNT_1_USERNAME_VALUE,
+            A_PASSWORD);
 
-    public static final AccountCreatedDto ACCOUNT_CREATED_DTO = AccountCreatedDto.builder()
-            .accountId(ACCOUNT_1_ID_VALUE)
-            .createdAt(NOW)
-            .build();
+    public static final AccountCreatedDto ACCOUNT_CREATED_DTO = new AccountCreatedDto(ACCOUNT_1_ID_VALUE, NOW);
 
     private DataAccount() {
 

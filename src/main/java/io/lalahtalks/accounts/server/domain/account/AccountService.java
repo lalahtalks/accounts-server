@@ -29,20 +29,16 @@ public class AccountService {
         checkAccountDoesNotAlreadyExist(request.email());
         var userRegistered = registerUser(request);
         var account = create(userRegistered, request);
-        return AccountCreated.builder()
-                .accountId(account.id())
-                .createdAt(account.createdAt())
-                .build();
+        return new AccountCreated(account.id(), account.createdAt());
     }
 
     private Account create(UserRegistered userRegistered, AccountCreationRequest request) {
         var accountId = new AccountId(userRegistered.userId().value());
-        var account = Account.builder()
-                .id(accountId)
-                .email(request.email())
-                .username(request.username())
-                .createdAt(userRegistered.registeredAt())
-                .build();
+        var account = new Account(
+                accountId,
+                request.email(),
+                request.username(),
+                userRegistered.registeredAt());
 
         accountRepository.save(account);
         return account;

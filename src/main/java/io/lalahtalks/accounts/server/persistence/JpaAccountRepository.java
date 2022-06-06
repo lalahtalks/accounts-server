@@ -4,7 +4,6 @@ import io.lalahtalks.accounts.server.domain.Email;
 import io.lalahtalks.accounts.server.domain.account.Account;
 import io.lalahtalks.accounts.server.domain.account.AccountId;
 import io.lalahtalks.accounts.server.domain.account.AccountRepository;
-import io.lalahtalks.accounts.server.domain.user.Username;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -12,45 +11,29 @@ import java.util.Optional;
 @Component
 public class JpaAccountRepository implements AccountRepository {
 
-    private final AccountEntityRepository accountEntityRepository;
+    private final AccountDao accountDao;
+    private final AccountJpaDtoMapper accountJpaDtoMapper;
 
-    public JpaAccountRepository(AccountEntityRepository accountEntityRepository) {
-        this.accountEntityRepository = accountEntityRepository;
+    public JpaAccountRepository(AccountDao accountDao, AccountJpaDtoMapper accountJpaDtoMapper) {
+        this.accountDao = accountDao;
+        this.accountJpaDtoMapper = accountJpaDtoMapper;
     }
 
     @Override
     public boolean exists(Email email) {
-        return accountEntityRepository.existsByEmail(email.value());
+        return accountDao.existsByEmail(email.value());
     }
 
     @Override
     public Optional<Account> find(AccountId accountId) {
-        return accountEntityRepository.findById(accountId.value())
-                .map(this::fromEntity);
+        return accountDao.findById(accountId.value())
+                .map(accountJpaDtoMapper::from);
     }
 
     @Override
     public void save(Account account) {
-        var toBeSaved = toEntity(account);
-        accountEntityRepository.save(toBeSaved);
-    }
-
-    private Account fromEntity(AccountEntity entity) {
-        return Account.builder()
-                .id(new AccountId(entity.id()))
-                .email(new Email(entity.email()))
-                .username(new Username(entity.username()))
-                .createdAt(entity.createdAt())
-                .build();
-    }
-
-    private AccountEntity toEntity(Account account) {
-        return AccountEntity.builder()
-                .id(account.id().value())
-                .email(account.email().value())
-                .username(account.username().value())
-                .createdAt(account.createdAt())
-                .build();
+        var toBeSaved = accountJpaDtoMapper.to(account);
+        accountDao.save(toBeSaved);
     }
 
 }

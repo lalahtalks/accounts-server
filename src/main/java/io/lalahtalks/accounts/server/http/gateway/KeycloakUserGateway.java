@@ -23,10 +23,7 @@ public class KeycloakUserGateway implements UserGateway {
     @Override
     public UserRegistered register(UserRegistrationRequest request) {
         var createdId = createAndGetId(request);
-        return UserRegistered.builder()
-                .userId(createdId)
-                .registeredAt(request.createdAt())
-                .build();
+        return new UserRegistered(createdId, request.createdAt());
     }
 
     private UserId createAndGetId(UserRegistrationRequest request) {
