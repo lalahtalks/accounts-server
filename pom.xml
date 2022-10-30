@@ -15,7 +15,7 @@
 
     <properties>
         <accounts-client.version>1.0-SNAPSHOT</accounts-client.version>
-        <keycloak.version>18.0.0</keycloak.version>
+        <keycloak.version>19.0.3</keycloak.version>
         <spring-starters.version>1.0-SNAPSHOT</spring-starters.version>
     </properties>
 
