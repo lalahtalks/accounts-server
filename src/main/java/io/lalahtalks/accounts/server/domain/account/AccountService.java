@@ -4,6 +4,7 @@ import io.lalahtalks.accounts.server.domain.Email;
 import io.lalahtalks.accounts.server.domain.user.UserGateway;
 import io.lalahtalks.accounts.server.domain.user.UserRegistered;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Clock;
 
@@ -20,11 +21,13 @@ public class AccountService {
         this.userGateway = userGateway;
     }
 
+    @Transactional(readOnly = true)
     public Account get(AccountId accountId) {
         return accountRepository.find(accountId)
                 .orElseThrow(() -> new AccountNotFoundException(accountId));
     }
 
+    @Transactional
     public AccountCreated create(AccountCreationRequest request) {
         checkAccountDoesNotAlreadyExist(request.email());
         var userRegistered = registerUser(request);
